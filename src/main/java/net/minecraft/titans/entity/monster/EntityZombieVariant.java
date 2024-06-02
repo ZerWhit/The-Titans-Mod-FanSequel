@@ -2,19 +2,21 @@ package net.minecraft.titans.entity.monster;
 
 import net.endermanofdoom.mac.util.TranslateUtil;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.titans.api.EnumMobTier;
-import net.minecraft.titans.api.IMobTier;
-import net.minecraft.titans.api.IVariedMob;
+import net.minecraft.titans.api.variants.types.EnumMobTier;
+import net.minecraft.titans.api.variants.types.IMobTier;
+import net.minecraft.titans.api.variants.IVariedMob;
 import net.minecraft.world.World;
 
 public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMobTier
 {
-    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityZombieVariant.class, DataSerializers.VARINT);
-	
-    public EntityZombieVariant(World worldIn) 
+	private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityZombieVariant.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> MULTIPLIER = EntityDataManager.<Float>createKey(EntityZombieVariant.class, DataSerializers.FLOAT);
+
+    public EntityZombieVariant(World worldIn)
 	{
 		super(worldIn);
 	}
@@ -23,9 +25,24 @@ public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMo
     {
         super.entityInit();
         this.dataManager.register(VARIANT, Integer.valueOf(0));
-    }    
-    
-    public int getVariant()
+		this.dataManager.register(MULTIPLIER, Float.valueOf(0));
+    }
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		super.writeEntityToNBT(compound);
+		compound.setInteger("Variant", getVariant());
+		compound.setFloat("Multiplier", getMultiplier());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
+		setVariant(compound.getInteger("Variant"));
+		setMultiplier(compound.getFloat("Multiplier"));
+	}
+
+	public int getVariant()
     {
         return ((Integer)this.dataManager.get(VARIANT)).intValue();
     }
@@ -34,6 +51,16 @@ public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMo
     {
         this.dataManager.set(VARIANT, Integer.valueOf(time));
     }
+
+	public float getMultiplier()
+	{
+		return ((Float)this.dataManager.get(MULTIPLIER)).floatValue();
+	}
+
+	public void setMultiplier(float multiplier)
+	{
+		this.dataManager.set(MULTIPLIER, Float.valueOf(multiplier));
+	}
 
     @Override
     public String getName()
@@ -44,7 +71,12 @@ public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMo
         	return TranslateUtil.translate("entity.zombie.variant." + getVariant());
     }
 
-	public double getMobHealth() 
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+	}
+
+	public double getVariantHealth()
 	{
 		switch (this.getVariant())
 		{
@@ -81,7 +113,7 @@ public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMo
 		}
 	}
 
-	public double getMobAttack() 
+	public double getVariantAttack()
 	{
 		switch (this.getVariant())
 		{
@@ -118,7 +150,7 @@ public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMo
 		}
 	}
 
-	public double getMobSpeed() 
+	public double getVariantSpeed()
 	{
 		switch (this.getVariant())
 		{
@@ -140,6 +172,6 @@ public class EntityZombieVariant extends EntityZombie implements IVariedMob, IMo
 	@Override
 	public EnumMobTier getTier()
 	{
-		return EnumMobTier.NORMAL;
+		return EnumMobTier.getByMultiplier(getMultiplier());
 	}
 }
