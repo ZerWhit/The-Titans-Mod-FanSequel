@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.titans.TheTitans;
 import net.minecraft.titans.entity.*;
 import net.minecraft.titans.entity.god.*;
+import net.minecraft.titans.entity.monster.EntityZombieVariant;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
@@ -13,6 +14,7 @@ public class TEntities
 
 	public static void registerEntity()
 	{
+		createEntity(EntityZombieVariant.class, "zombie", 128);
 		createEntityWithEgg(EntityWitherzilla.class, "witherzilla", 0x000000, 0xffffea, 1028);
 		createEntity(EntityGammaLightning.class, "gamma_lightning", 128);
 		createEntity(EntityUrLightning.class, "ur_lightning", 128);
