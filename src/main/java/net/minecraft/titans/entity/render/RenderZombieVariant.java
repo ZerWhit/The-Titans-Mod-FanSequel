@@ -85,6 +85,7 @@ public class RenderZombieVariant extends RenderZombie {
         }
 
         if (variedMob.getMultiplier() > EnumMobTier.getMultiplierByID(4)) {
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             bindTexture(new ResourceLocation(TheTitans.getTextures("textures/entities", "minions/overlay/zombie_overlay_herald.png")));
             overlayHerald.render(variedMob, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
         }
