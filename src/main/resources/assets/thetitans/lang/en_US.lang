@@ -456,6 +456,15 @@ item.void.name=Void Essence
     #- Entities -#
 #--------------------#
 
+rank.normal=Variant
+rank.loyalist=Loyalist
+rank.priest=Priest
+rank.zealot=Zealot
+rank.bishop=Bishop
+rank.templar=Templar
+rank.lord=Lord
+rank.demititan=Demititan
+
 entity.zombie.variant.0=Zombie
 entity.zombie.variant.1=Golden Zombie Guard
 entity.zombie.variant.2=Gray Zombie

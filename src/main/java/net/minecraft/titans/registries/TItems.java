@@ -259,8 +259,9 @@ public class TItems {
 
 			BaseVariantEgg egg = new BaseVariantEgg(entityName, primary, secondary, entityName);
 			egg.tierID = i;
-			String prefix = "thetitans:spawn_egg_" + entityName + ".variant";
-			add(prefix + "." + i, egg, TheTitans.TAB_MOBS, true, prefix);
+			String prefix = "thetitans:spawn_egg_variants";
+			String registryName = prefix  + "." + entityName + "." + i;
+			add(registryName, egg, TheTitans.TAB_MOBS, true, prefix);
 		}
 	}
 
