@@ -36,7 +36,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.titans.TitanConfig;
-import net.minecraft.titans.api.IMobTier;
+import net.minecraft.titans.api.variants.types.IMobTier;
 import net.minecraft.titans.entity.EntityMultiPart;
 import net.minecraft.titans.registries.TSounds;
 import net.minecraft.util.CombatRules;

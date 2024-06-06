@@ -24,7 +24,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.titans.TheTitans;
-import net.minecraft.titans.api.EnumMobTier;
+import net.minecraft.titans.api.variants.types.EnumMobTier;
 import net.minecraft.titans.entity.EntityMultiPart;
 import net.minecraft.titans.entity.EntityUrLightning;
 import net.minecraft.titans.entity.titan.EntityTitan;
