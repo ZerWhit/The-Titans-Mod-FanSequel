@@ -1,5 +1,6 @@
 package net.minecraft.titans;
 
+import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.material.Material;
@@ -65,7 +66,12 @@ public class TheTitans
 	public static final int DIMENSION_VOID_ID = 312;
 	public static final int DIMENSION_NOWHERE_ID = 313;
 	public static final DimensionType DIMENSION_VOID = DimensionType.register("The Void", "_void", DIMENSION_VOID_ID, WorldProviderVoid.class, false);
-	@Mod.EventHandler
+
+    public static String getTextures(String library, String path) {
+		return "thetitans:" + library + "/" + path;
+    }
+
+    @Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
 		logger = e.getModLog();
